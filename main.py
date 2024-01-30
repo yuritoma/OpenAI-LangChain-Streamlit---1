@@ -191,25 +191,25 @@ def main():
     st.write(css, unsafe_allow_html=True)
     global MODEL, PERSONALITY, TEMP, pdf_docs
     init_ses_states()
-    deploy_tab, code_tab= st.tabs(["Deployment", "Code"])
-    with deploy_tab:
-        st.title(":books: Multi-Document ChatBot 🤖")
-        st.subheader("Powered by OpenAI + LangChain + Streamlit")
-        sidebar()
-        if st.session_state.get("pdf_processed") and st.session_state.api_authenticated:
-            prompt = set_prompt(PERSONALITY)
-            pdf_analytics(pdf_docs)
-            with st.form("user_input_form"):
-                user_question = st.text_input("Ask a question about your documents:")
-                send_button = st.form_submit_button("Send")
-            if send_button and user_question:
-                handle_userinput(user_question, prompt)
-        if not st.session_state.get("pdf_processed"): 
-            st.caption("Please Upload Atleast 1 PDF Before Proceeding")
-        if not st.session_state.api_authenticated:
-            st.caption("Please Authenticate OpenAI API Before Proceeding")
-    with code_tab:
-        display_code()
+    # deploy_tab, code_tab= st.tabs(["Deployment", "Code"])
+    # with deploy_tab:
+    st.title(":books: Multi-Document Byte Builder ChatBot 🤖")
+    st.subheader("Powered by OpenAI + LangChain + Streamlit")
+    sidebar()
+    if st.session_state.get("pdf_processed") and st.session_state.api_authenticated:
+        prompt = set_prompt(PERSONALITY)
+        pdf_analytics(pdf_docs)
+        with st.form("user_input_form"):
+            user_question = st.text_input("Ask a question about your documents:")
+            send_button = st.form_submit_button("Send")
+        if send_button and user_question:
+            handle_userinput(user_question, prompt)
+    if not st.session_state.get("pdf_processed"): 
+        st.caption("Please Upload Atleast 1 PDF Before Proceeding")
+    if not st.session_state.api_authenticated:
+        st.caption("Please Authenticate OpenAI API Before Proceeding")
+    # with code_tab:
+    #     display_code()
 
 
 if __name__ == '__main__':
